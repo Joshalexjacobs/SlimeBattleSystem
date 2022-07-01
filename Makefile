@@ -1,8 +1,8 @@
 build:
-	dotnet build PokerSharp/*.csproj
+	dotnet build SlimeBattleSystem/*.csproj
 
 test:
-	dotnet test PokerSharp.Tests/*.csproj
+	dotnet test SlimeBattleSystem.Tests/*.csproj
 
 clean:
 	git clean -xdf
