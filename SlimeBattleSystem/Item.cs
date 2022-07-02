@@ -1,6 +1,9 @@
+using System;
+
 namespace SlimeBattleSystem
 {
 
+    [Serializable]
     public class Item
     {
 
@@ -23,6 +26,7 @@ namespace SlimeBattleSystem
         
     }
 
+    [Serializable]
     public class DroppableItem
     {
 

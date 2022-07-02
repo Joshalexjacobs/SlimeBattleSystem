@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace SlimeBattleSystem
 {
+    [Serializable]
     public enum ParticipantActionType
     {
         Attack,
@@ -11,6 +12,7 @@ namespace SlimeBattleSystem
         Flee
     }
 
+    [Serializable]
     public class ParticipantAction
     {
         public ParticipantAction()
@@ -48,6 +50,7 @@ namespace SlimeBattleSystem
         public Spell spell;
     }
 
+    [Serializable]
     public enum ParticipantType
     {
         Player,
@@ -55,6 +58,7 @@ namespace SlimeBattleSystem
         Enemy
     }
 
+    [Serializable]
     public class Participant
     {
         public Participant()

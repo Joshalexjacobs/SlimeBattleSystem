@@ -1,6 +1,9 @@
+using System;
+
 namespace SlimeBattleSystem
 {
     
+    [Serializable]
     public class Armor
     {
 
