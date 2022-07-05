@@ -1,0 +1,49 @@
+name: release
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths:
+    - '**.cs'
+    - '**.csproj'
+
+env:
+  DOTNET_VERSION: '6.0'
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build SlimeBattleSystem/*.csproj --configuration Release
+
+    - name: Release
+      run: |
+        yes | cp -r SlimeBattleSystem/bin/Release/netstandard2.0/SlimeBattleSystem.dll UnityPackage/Libs/
+
+    - name: Setup git
+      run: |
+        git config user.name "joshalexjacobs-bot"
+        git config user.email "<>"
+
+    - name: Git commit changes
+      run: |
+        git add UnityPackage/Libs/
+        git commit -m "Updated SlimeBattleSystem.dll [skip ci]" || exit 0
+        git push origin main
+
+    - name: Git push subtree
+      run: |
+        git push origin `git subtree split --prefix UnityPackage main`:upm --force
