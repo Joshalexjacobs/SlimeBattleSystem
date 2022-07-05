@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace SlimeBattleSystem.Tests
@@ -211,7 +214,7 @@ namespace SlimeBattleSystem.Tests
                 new Stats(25, 7, 7, 7, 6, 5, 5));
 
             Assert.AreEqual(2, 
-                BattleSystem.DetermineRemainingParticipants(new List<Participant>()
+                BattleSystem.GetNumberOfRemainingParticipants(new List<Participant>()
                     {participantA, participantB, participantC}));
         }
 

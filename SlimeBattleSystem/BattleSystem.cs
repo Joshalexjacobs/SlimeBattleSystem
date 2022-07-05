@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SlimeBattleSystem;
@@ -71,41 +72,41 @@ namespace SlimeBattleSystem
         }
 
 
-        public static int DetermineAttackDamage(Participant attacker, Participant defender)
+        public static AttackResults DetermineAttackDamage(Participant attacker, Participant defender)
         {
             return DetermineAttackDamage(attacker, defender, Random);
         }
 
-        public static int DetermineAttackDamage(Participant attacker, Participant defender, Random random)
+        public static AttackResults DetermineAttackDamage(Participant attacker, Participant defender, Random random)
         {
 
             if (random.Next(defender.stats.dodge, 64) <= defender.stats.dodge)
             {
                 // attack was dodged
-                
-                return 0;
+
+                return new AttackResults(AttackResults.AttackType.Missed, 0);
             }
 
             if (random.Next(1, 32) == 1)
             {
                 // critical hit
 
-                var criticalHitAttackStrength = attacker.stats.strength + attacker.stats.attackPower;
+                var criticalHitAttackStrength = attacker.stats.attackPower;
 
                 var criticalHitDamage = criticalHitAttackStrength / random.Next(1, 2);
 
-                return criticalHitDamage;
+                return new AttackResults(AttackResults.AttackType.CriticalHit, criticalHitDamage);
             }
 
             // perform regular attack
 
-            var attackStrength = attacker.stats.strength + attacker.stats.attackPower;
+            var attackStrength = attacker.stats.attackPower;
 
-            var targetDefense = defender.stats.agility + defender.stats.defensePower;
+            var targetDefense = defender.stats.defensePower;
 
             var damage = ((attackStrength - (targetDefense / 2)) / random.Next(2, 4));
 
-            return damage;
+            return new AttackResults(AttackResults.AttackType.Hit, damage);
         }
 
         public static bool DetermineParticipantFleeing(Participant participant, List<Participant> runningFrom)
@@ -143,8 +144,18 @@ namespace SlimeBattleSystem
             return participants.OrderByDescending(participant => participant.stats.agility).ToList()[0];
         }
         
-        public static int DetermineRemainingParticipants(List<Participant> enemyParticipants) {
-            return enemyParticipants.Count(participant => participant.stats.hitPoints > 0);
+        public static int GetNumberOfRemainingParticipants(List<Participant> participants) {
+            return participants.Count(participant => participant.stats.hitPoints > 0);
+        }
+
+        public static bool IsBattleOver(List<Participant> participants)
+        {
+            var enemyParticipants = GetEnemyParticipants(participants);
+            
+            var playerParticipants = GetPlayerParticipants(participants);
+            
+            return GetNumberOfRemainingParticipants(enemyParticipants) == 0 
+                   || GetNumberOfRemainingParticipants(playerParticipants) == 0;
         }
 
         public static int DetermineExperiencePoints(List<Participant> defeatedParticipants) 
@@ -194,6 +205,28 @@ namespace SlimeBattleSystem
             return itemsDropped;
         }
 
+    }
+
+    [Serializable]
+    public class AttackResults
+    {
+
+        public enum AttackType
+        {
+            Hit,
+            CriticalHit,
+            Missed
+        }
+
+        public AttackType attackType;
+        
+        public int damage;
+
+        public AttackResults(AttackType attackType, int damage)
+        {
+            this.attackType = attackType;
+            this.damage = damage;
+        }
     }
     
 }

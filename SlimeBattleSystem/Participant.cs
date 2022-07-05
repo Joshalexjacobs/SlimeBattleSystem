@@ -84,12 +84,12 @@ namespace SlimeBattleSystem
         // the player equips a new weapon or piece of armor
         public void CalculateAttackPower()
         {
-            stats.attackPower = weapon.attackPower;
+            stats.attackPower = stats.strength + weapon.attackPower;
         }
 
         public void CalculateDefensePower()
         {
-            stats.defensePower = armor.defensePower + shield.defensePower;
+            stats.defensePower = stats.agility + armor.defensePower + shield.defensePower;
         }
 
         public virtual ParticipantAction DetermineParticipantAction(Random random)
