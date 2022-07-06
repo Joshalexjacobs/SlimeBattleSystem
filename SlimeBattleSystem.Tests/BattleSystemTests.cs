@@ -80,10 +80,10 @@ namespace SlimeBattleSystem.Tests
             public void CriticalHit()
             {
                 Participant participantA = new Participant("Participant A", 
-                    new Stats(22, 12, 8, 6, 4, 8, 2));
+                    new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
 
                 Participant participantB = new Participant("Participant B", 
-                    new Stats(25, 7, 7, 5, 6, 5, 5));
+                    new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
                 // Critical hit
                 Assert.AreEqual(12, BattleSystem.DetermineAttackDamage(
@@ -96,10 +96,10 @@ namespace SlimeBattleSystem.Tests
             public void Dodge()
             {
                 Participant participantA = new Participant("Participant A", 
-                    new Stats(22, 12, 8, 6, 4, 8, 2));
+                    new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
 
                 Participant participantB = new Participant("Participant B", 
-                    new Stats(25, 7, 7, 5, 6, 5, 5));
+                    new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
                 
                 // Dodge
                 Assert.AreEqual(0, BattleSystem.DetermineAttackDamage(
@@ -112,10 +112,10 @@ namespace SlimeBattleSystem.Tests
             public void RegularHit()
             {
                 Participant participantA = new Participant("Participant A", 
-                    new Stats(22, 12, 8, 6, 4, 8, 2));
+                    new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
 
                 Participant participantB = new Participant("Participant B", 
-                    new Stats(25, 7, 7, 5, 6, 5, 5));
+                    new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
                 
                 // Regular hit
                 Assert.AreEqual(3, BattleSystem.DetermineAttackDamage(
@@ -130,10 +130,10 @@ namespace SlimeBattleSystem.Tests
         public void DetermineParticipantFleeing()
         {
             Participant participantA = new Participant("Participant A", 
-                new Stats(22, 12, 8, 6, 4, 8, 2));
+                new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
             
             Participant participantB = new Participant("Participant B", 
-                new Stats(25, 7, 7, 5, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
             Assert.IsTrue(
                 BattleSystem.DetermineParticipantFleeing(participantA, participantB, new RandomMock(new [] { 0, 3 })));
@@ -146,15 +146,15 @@ namespace SlimeBattleSystem.Tests
         public void GetPlayerParticipants()
         {
             Participant participantA = new Participant("Participant A", 
-                new Stats(22, 12, 8, 6, 4, 8, 2));
+                new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
             
             Participant participantB = new Participant("Participant B", 
-                new Stats(25, 7, 7, 5, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
             participantB.ParticipantType = ParticipantType.Player;
             
             Participant participantC = new Participant("Participant C", 
-                new Stats(25, 7, 7, 5, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
             Assert.AreEqual(participantB, 
                 BattleSystem.GetPlayerParticipants(new List<Participant>() {participantA, participantB, participantC})[0]);
@@ -164,15 +164,15 @@ namespace SlimeBattleSystem.Tests
         public void GetEnemyParticipants()
         {
             Participant participantA = new Participant("Participant A", 
-                new Stats(22, 12, 8, 6, 4, 8, 2));
+                new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
             
             Participant participantB = new Participant("Participant B", 
-                new Stats(25, 7, 7, 5, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
             participantB.ParticipantType = ParticipantType.Player;
             
             Participant participantC = new Participant("Participant C", 
-                new Stats(25, 7, 7, 5, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
             var participants = new List<Participant>() {participantA, participantB, participantC};
 
@@ -187,15 +187,15 @@ namespace SlimeBattleSystem.Tests
         public void GetParticipantWithHighestAgility()
         {
             Participant participantA = new Participant("Participant A", 
-                new Stats(22, 12, 8, 6, 4, 8, 2));
+                new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
             
             Participant participantB = new Participant("Participant B", 
-                new Stats(25, 7, 7, 5, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 5, 6, 5, 5));
 
             participantB.ParticipantType = ParticipantType.Player;
             
             Participant participantC = new Participant("Participant C", 
-                new Stats(25, 7, 7, 7, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 7, 6, 5, 5));
 
             Assert.AreEqual(participantC, 
                 BattleSystem.GetParticipantWithHighestAgility(new List<Participant>() {participantA, participantB, participantC}));
@@ -205,13 +205,13 @@ namespace SlimeBattleSystem.Tests
         public void DetermineRemainingParticipants()
         {
             Participant participantA = new Participant("Participant A", 
-                new Stats(22, 12, 8, 6, 4, 8, 2));
+                new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
             
             Participant participantB = new Participant("Participant B", 
-                new Stats(0, 7, 7, 5, 6, 5, 5));
+                new Stats(0, 0, 7, 7, 7, 5, 6, 5, 5));
 
             Participant participantC = new Participant("Participant C", 
-                new Stats(25, 7, 7, 7, 6, 5, 5));
+                new Stats(25, 25, 7, 7, 7, 7, 6, 5, 5));
 
             Assert.AreEqual(2, 
                 BattleSystem.GetNumberOfRemainingParticipants(new List<Participant>()
@@ -225,7 +225,7 @@ namespace SlimeBattleSystem.Tests
             public void ExperiencePoints()
             {
                 Participant participantA = new Participant("Participant A",
-                    new Stats(22, 12, 8, 6, 4, 8, 2));
+                    new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
 
                 participantA.experiencePoints = 12;
 
@@ -237,7 +237,7 @@ namespace SlimeBattleSystem.Tests
             public void GoldPoints()
             {
                 Participant participantA = new Participant("Participant A",
-                    new Stats(22, 12, 8, 6, 4, 8, 2));
+                    new Stats(22, 22, 12,  12, 8, 6, 4, 8, 2));
 
                 participantA.goldPoints = 12;
 
@@ -253,7 +253,7 @@ namespace SlimeBattleSystem.Tests
             public void ItemsDropped()
             {
                 Participant participantA = new Participant("Participant A",
-                    new Stats(22, 12, 8, 6, 4, 8, 2));
+                    new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
 
                 Item potion = new Item("Potion");
 

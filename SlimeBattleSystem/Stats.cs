@@ -6,11 +6,14 @@ namespace SlimeBattleSystem
     [Serializable]
     public class Stats
     {
-        public Stats()
-        {
+        public Stats() {
             hitPoints = 1;
+                
+            maxHitPoints = 1;
 
             magicPoints = 1;
+                
+            maxMagicPoints = 1;
 
             strength = 1;
 
@@ -26,8 +29,12 @@ namespace SlimeBattleSystem
         public Stats(Stats stats)
         {
             hitPoints = stats.hitPoints;
+            
+            maxHitPoints = stats.maxHitPoints;
 
             magicPoints = stats.magicPoints;
+            
+            maxMagicPoints = stats.maxMagicPoints;
 
             strength = stats.strength;
 
@@ -40,26 +47,33 @@ namespace SlimeBattleSystem
             dodge = stats.dodge;
         }
 
-        public Stats(int hitPoints, int magicPoints, int strength, int agility, int attackPower, int defensePower, int dodge)
-        {
+        public Stats(int hitPoints, int maxHitPoints, int magicPoints, int maxMagicPoints, int strength, int agility, int attackPower, int defensePower, int dodge) {
             this.hitPoints = hitPoints;
-
+            
+            this.maxHitPoints = maxHitPoints;
+            
             this.magicPoints = magicPoints;
-
+            
+            this.maxMagicPoints = maxMagicPoints;
+            
             this.strength = strength;
-
+            
             this.agility = agility;
             
             this.attackPower = attackPower;
-
+            
             this.defensePower = defensePower;
-
+            
             this.dodge = dodge;
         }
 
         public int hitPoints;
+        
+        public int maxHitPoints;
 
         public int magicPoints;
+        
+        public int maxMagicPoints;
 
         // player's base strength
         public int strength;
