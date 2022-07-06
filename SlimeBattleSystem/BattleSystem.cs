@@ -71,7 +71,6 @@ namespace SlimeBattleSystem
             return playerParticipants[random.Next(0, playerParticipants.Count )];
         }
 
-
         public static AttackResults DetermineAttackDamage(Participant attacker, Participant defender)
         {
             return DetermineAttackDamage(attacker, defender, Random);
@@ -109,11 +108,21 @@ namespace SlimeBattleSystem
             return new AttackResults(AttackResults.AttackType.Hit, damage);
         }
 
+        public static bool DetermineParticipantFleeing(Participant participant, Participant runningFrom)
+        {
+            return DetermineParticipantFleeing(participant,runningFrom, Random);
+        }
+
         public static bool DetermineParticipantFleeing(Participant participant, List<Participant> runningFrom)
         {
             return DetermineParticipantFleeing(participant, GetParticipantWithHighestAgility(runningFrom), Random);
         }
-        
+
+        public static bool DetermineParticipantFleeing(Participant participant, List<Participant> runningFrom, Random random)
+        {
+            return DetermineParticipantFleeing(participant, GetParticipantWithHighestAgility(runningFrom), random);
+        }
+
         public static bool DetermineParticipantFleeing(Participant participant, Participant runningFrom, Random random)
         {
             // fleeing formula
@@ -158,6 +167,11 @@ namespace SlimeBattleSystem
                    || GetNumberOfRemainingParticipants(playerParticipants) == 0;
         }
 
+        public static int DetermineExperiencePoints(Participant defeatedParticipant) 
+        {
+            return DetermineExperiencePoints(new List<Participant>() { defeatedParticipant });
+        }
+
         public static int DetermineExperiencePoints(List<Participant> defeatedParticipants) 
         {
             int xpSum = 0;
@@ -169,9 +183,19 @@ namespace SlimeBattleSystem
             return xpSum;
         }
         
+        public static int DetermineGoldPoints(Participant defeatedParticipant)
+        {
+            return DetermineGoldPoints(new List<Participant>() { defeatedParticipant }, Random);
+        }
+
         public static int DetermineGoldPoints(List<Participant> defeatedParticipants)
         {
             return DetermineGoldPoints(defeatedParticipants, Random);
+        }
+        
+        public static int DetermineGoldPoints(Participant defeatedParticipant, Random random)
+        {
+            return DetermineGoldPoints(new List<Participant>() { defeatedParticipant }, random);
         }
         
         public static int DetermineGoldPoints(List<Participant> defeatedParticipants, Random random) 
@@ -190,6 +214,16 @@ namespace SlimeBattleSystem
         public static List<Item> DetermineItemsDropped(List<Participant> defeatedParticipants)
         {
             return DetermineItemsDropped(defeatedParticipants, Random);
+        }
+
+        public static List<Item> DetermineItemsDropped(Participant defeatedParticipant)
+        {
+            return DetermineItemsDropped(new List<Participant>() { defeatedParticipant }, Random);
+        }
+
+        public static List<Item> DetermineItemsDropped(Participant defeatedParticipant, Random random)
+        {
+            return DetermineItemsDropped(new List<Participant>() { defeatedParticipant }, random);
         }
 
         public static List<Item> DetermineItemsDropped(List<Participant> defeatedParticipants, Random random) 
@@ -230,98 +264,3 @@ namespace SlimeBattleSystem
     }
     
 }
-
-// TODO: remove this class and move this test logic into a sample battle scene
-// public class TestBattleSystem
-// {
-//
-//     private List<Participant> _participants;
-//
-//     private List<Participant> _enemyParticipants;
-//
-//     private List<Participant> _playerParticipants;
-//     
-//     public TestBattleSystem() 
-//     {
-//         _enemyParticipants = BattleSystem.GetEnemyParticipants(_participants);
-//         
-//         _playerParticipants = BattleSystem.GetPlayerParticipants(_participants);
-//     }
-//
-//     public void Tick() {
-//         while (BattleSystem.DetermineRemainingParticipants(_enemyParticipants) > 0 
-//                && BattleSystem.DetermineRemainingParticipants(_playerParticipants) > 0) {
-//             
-//             var orderedParticipants = BattleSystem.DetermineTurnOrder(_participants);
-//
-//             foreach (var orderedParticipant in orderedParticipants)
-//             {
-//                 if (orderedParticipant.stats.hitPoints > 0) {
-//                     if (ParticipantType.Player.Equals(orderedParticipant.ParticipantType))
-//                     {
-//                         // prompt player for action
-//                     }
-//                     else // currently enemies only
-//                     {
-//                         var action = orderedParticipant.DetermineParticipantAction(BattleSystem.Random);
-//
-//                         switch (action.ActionType)
-//                         {
-//                             case ParticipantActionType.Attack:
-//                                 Participant attackTarget = BattleSystem.DetermineEnemyTarget(BattleSystem.GetPlayerParticipants(_participants));
-//
-//                                 var damage = BattleSystem.DetermineAttackDamage(orderedParticipant, attackTarget);
-//                                 
-//                                 // inflict damage to target
-//                                 attackTarget.InflictDamage(damage);
-//                                 
-//                                 return;
-//                              case ParticipantActionType.Item:
-//                                 Participant itemTarget = action.DetermineTarget(_participants);
-//                                 
-//                                 action.item.UseItem(itemTarget);
-//                                 
-//                                 return;
-//                             case ParticipantActionType.Spell:
-//                                 Participant spellTarget = action.DetermineTarget(_participants);
-//
-//                                 action.spell.CastSpell(spellTarget);
-//                                 
-//                                 return;
-//                             case ParticipantActionType.Flee:
-//                                 if (BattleSystem.DetermineParticipantFleeing(
-//                                     orderedParticipant,
-//                                     BattleSystem.GetPlayerParticipants(_participants)
-//                                 ))
-//                                 {
-//                                     // enemy escaped!
-//                                 }
-//                                 else
-//                                 {
-//                                     // enemy failed to escape!
-//                                 }
-//                                 
-//                                 return;
-//                         }
-//                     }
-//                 }
-//             }
-//         }
-//
-//         if (BattleSystem.DetermineRemainingParticipants(_playerParticipants) > 0) {
-//             var experiencePoints = BattleSystem.DetermineExperiencePoints(_enemyParticipants);
-//
-//             // apply XP points and level up any characters
-//             
-//             var goldPoints = BattleSystem.DetermineGoldPoints(_enemyParticipants);
-//             
-//             // reward gold points
-//
-//             var itemsDropped = BattleSystem.DetermineItemsDropped(_enemyParticipants);
-//
-//             // reward items to player
-//         }
-//         
-//     }
-//     
-// }
