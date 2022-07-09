@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 
 namespace SlimeBattleSystem.Tests
@@ -254,22 +252,22 @@ namespace SlimeBattleSystem.Tests
             {
                 Participant participantA = new Participant("Participant A",
                     new Stats(22, 22, 12, 12, 8, 6, 4, 8, 2));
+                
+                Object potion = new Object();
 
-                Item potion = new Item("Potion");
-
-                DroppableItem droppableItem = new DroppableItem(potion, 50);
-
-                participantA.droppableItems = new List<DroppableItem>() {droppableItem};
+                Dictionary<Object, int> droppableItems = new Dictionary<Object, int>();
+                
+                droppableItems.Add(potion, 50);
 
                 Assert.AreEqual(1,
                     BattleSystem.DetermineItemsDropped(
-                        new List<Participant>() {participantA},
+                        droppableItems,
                         new RandomMock(new[] {50})).Count
                 );
-
+                
                 Assert.AreEqual(potion,
                     BattleSystem.DetermineItemsDropped(
-                        new List<Participant>() {participantA},
+                        droppableItems,
                         new RandomMock(new[] {50}))[0]
                 );
 

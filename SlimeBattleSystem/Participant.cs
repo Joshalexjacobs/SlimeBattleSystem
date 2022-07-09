@@ -24,30 +24,12 @@ namespace SlimeBattleSystem
             ActionType = actionType;
         }
 
-        public ParticipantAction(ParticipantActionType actionType, Item item)
-        {
-            ActionType = actionType;
-            
-            this.item = item;
-        }
-
-        public ParticipantAction(ParticipantActionType actionType, Spell spell)
-        {
-            ActionType = actionType;
-            
-            this.spell = spell;
-        }
-
         public virtual Participant DetermineTarget(List<Participant> participants)
         {
             return participants[0];
         }
         
         public ParticipantActionType ActionType;
-
-        public Item item;
-
-        public Spell spell;
     }
 
     [Serializable]
@@ -101,7 +83,7 @@ namespace SlimeBattleSystem
                 return new ParticipantAction(ParticipantActionType.Attack);    
             }
 
-            return new ParticipantAction(ParticipantActionType.Spell, new Spell());
+            return new ParticipantAction();
         }
 
         public virtual void InflictDamage(int damage)
@@ -125,13 +107,9 @@ namespace SlimeBattleSystem
 
         public Armor shield;
 
-        public List<Spell> spells;
-
         public int experiencePoints;
 
         public int goldPoints;
-
-        public List<DroppableItem> droppableItems;
     }
     
 }

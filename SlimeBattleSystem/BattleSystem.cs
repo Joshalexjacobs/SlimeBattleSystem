@@ -211,31 +211,19 @@ namespace SlimeBattleSystem
             return gpSum;
         }
 
-        public static List<Item> DetermineItemsDropped(List<Participant> defeatedParticipants)
-        {
-            return DetermineItemsDropped(defeatedParticipants, Random);
+        public static List<Object> DetermineItemsDropped(Dictionary<Object, int> droppableItems) {
+            return DetermineItemsDropped(droppableItems, Random);
         }
-
-        public static List<Item> DetermineItemsDropped(Participant defeatedParticipant)
-        {
-            return DetermineItemsDropped(new List<Participant>() { defeatedParticipant }, Random);
-        }
-
-        public static List<Item> DetermineItemsDropped(Participant defeatedParticipant, Random random)
-        {
-            return DetermineItemsDropped(new List<Participant>() { defeatedParticipant }, random);
-        }
-
-        public static List<Item> DetermineItemsDropped(List<Participant> defeatedParticipants, Random random) 
-        {
-            List<Item> itemsDropped = new List<Item>();
+        
+        public static List<Object> DetermineItemsDropped(Dictionary<Object, int> droppableItems, Random random) {
+            List<Object> itemsDropped = new List<Object>();
             
-            foreach (var defeatedParticipant in defeatedParticipants) {
-                itemsDropped.AddRange(defeatedParticipant.droppableItems
-                    .Where(item => random.Next(item.chanceToDrop, 100) <= item.chanceToDrop)
-                    .Select(item => item.itemToDrop).ToList());
+            foreach (var droppableItem in droppableItems) {
+                if (random.Next(droppableItem.Value, 100) <= droppableItem.Value) {
+                    itemsDropped.Add(droppableItem.Key);
+                }
             }
-
+            
             return itemsDropped;
         }
 
