@@ -65,9 +65,7 @@ namespace SlimeBattleSystem
         
         public static Participant DetermineEnemyTarget(List<Participant> playerParticipants, Random random)
         {
-            // NPCs that are on the player's team have a 25% chance to be hit
-            // this is where you would also handle any formation based logic
-            // else, each player character has an equal chance to be hit by the enemy
+            // currently each player character has an equal chance to be hit by the enemy
             return playerParticipants[random.Next(0, playerParticipants.Count )];
         }
 
@@ -211,12 +209,12 @@ namespace SlimeBattleSystem
             return gpSum;
         }
 
-        public static List<Object> DetermineItemsDropped(Dictionary<Object, int> droppableItems) {
+        public static List<T> DetermineItemsDropped<T>(Dictionary<T, int> droppableItems) {
             return DetermineItemsDropped(droppableItems, Random);
         }
         
-        public static List<Object> DetermineItemsDropped(Dictionary<Object, int> droppableItems, Random random) {
-            List<Object> itemsDropped = new List<Object>();
+        public static List<T> DetermineItemsDropped<T>(Dictionary<T, int> droppableItems, Random random) {
+            List<T> itemsDropped = new List<T>();
             
             foreach (var droppableItem in droppableItems) {
                 if (random.Next(droppableItem.Value, 100) <= droppableItem.Value) {
