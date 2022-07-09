@@ -24,10 +24,11 @@ namespace SlimeBattleSystem
             defensePower = 1;
 
             dodge = 1;
+            
+            level = 1;
         }
 
-        public Stats(Stats stats)
-        {
+        public Stats(Stats stats) {
             hitPoints = stats.hitPoints;
             
             maxHitPoints = stats.maxHitPoints;
@@ -45,9 +46,11 @@ namespace SlimeBattleSystem
             defensePower = stats.defensePower;
 
             dodge = stats.dodge;
+            
+            level = stats.level;
         }
 
-        public Stats(int hitPoints, int maxHitPoints, int magicPoints, int maxMagicPoints, int strength, int agility, int attackPower, int defensePower, int dodge) {
+        public Stats(int hitPoints, int maxHitPoints, int magicPoints, int maxMagicPoints, int strength, int agility, int attackPower, int defensePower, int dodge, int level = 1) {
             this.hitPoints = hitPoints;
             
             this.maxHitPoints = maxHitPoints;
@@ -65,6 +68,8 @@ namespace SlimeBattleSystem
             this.defensePower = defensePower;
             
             this.dodge = dodge;
+
+            this.level = level;
         }
 
         public int hitPoints;
@@ -89,6 +94,8 @@ namespace SlimeBattleSystem
 
         // chance that a participant can dodge an attack
         public int dodge;
+        
+        public int level;
     }
     
 }
