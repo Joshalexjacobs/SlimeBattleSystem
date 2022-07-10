@@ -1,8 +1,19 @@
 # SlimeBattleSystem
 An easy to use RPG combat system for Unity that utilizes formulas from the original Dragon Quest.
 
+## Getting started
+
+1. Download the latest SlimeBattleSystem.dll release found [here!](https://github.com/Joshalexjacobs/SlimeBattleSystem/releases) 
+2. Drop it into your assets folder.
+
+## Classes
+
+## Functions
+
 ## Check out the sample!
 [url here]
+
+*Note: This package was created with the first Dragon Quest game in mind. Therefore a lot of the logic being handled here is intended for 1v1 battles, but I've done my best to try and support battles bigger than 2 combatants. A lot of this logic is currently untested and may have some kinks that I'll need to iron out in the future.*
 
 ## Formulas used
 
@@ -18,7 +29,7 @@ An easy to use RPG combat system for Unity that utilizes formulas from the origi
 ## What's missing?
 
 ### Spells and Items
-I originally planned on baking spells and items into the package, but after some testing decided that this will be much more flexible if handled by the user.
+I originally planned on baking spells and items into the package, but after some testing decided that this will be much more flexible if handled by the user. If you're looking for an easy way to do this, check out the [sample repo.](https://github.com/Joshalexjacobs/SlimeBattleSystemSample)
 
 ### Status ailments
 Currently there is no way to impair a player character or enemy's status (eg. Sleep, Poison, Paralysis, etc). These kinds of impairments are crucial to Dragon Quest and most other RPGs so I will be adding them in the near future, but for now they have not been included.
