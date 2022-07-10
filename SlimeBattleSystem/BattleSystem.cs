@@ -58,9 +58,9 @@ namespace SlimeBattleSystem {
     /// <returns>List<Participant></returns>
     public static List<Participant> DetermineTurnOrder(List<Participant> participants, Random random) {
       foreach (var participant in participants)
-        participant.turnOrder = CalculateTurnOrder(participant.stats.agility, random);
+        participant.TurnOrder = CalculateTurnOrder(participant.Stats.Agility, random);
 
-      participants.Sort((participantA, participantB) => participantB.turnOrder.CompareTo(participantA.turnOrder));
+      participants.Sort((participantA, participantB) => participantB.TurnOrder.CompareTo(participantA.TurnOrder));
 
       return participants;
     }
@@ -92,7 +92,7 @@ namespace SlimeBattleSystem {
     /// <param name="random">Random class to use in generating turn order.</param>
     /// <returns>AttackResults</returns>
     public static AttackResults DetermineAttackDamage(Participant attacker, Participant defender, Random random) {
-      if (random.Next(defender.stats.dodge, 64) <= defender.stats.dodge)
+      if (random.Next(defender.Stats.Dodge, 64) <= defender.Stats.Dodge)
         // attack was dodged
 
         return new AttackResults(AttackResults.AttackType.Missed, 0);
@@ -100,7 +100,7 @@ namespace SlimeBattleSystem {
       if (random.Next(1, 32) == 1) {
         // critical hit
 
-        var criticalHitAttackStrength = attacker.stats.attackPower;
+        var criticalHitAttackStrength = attacker.Stats.AttackPower;
 
         var criticalHitDamage = criticalHitAttackStrength / random.Next(1, 2);
 
@@ -109,9 +109,9 @@ namespace SlimeBattleSystem {
 
       // perform regular attack
 
-      var attackStrength = attacker.stats.attackPower;
+      var attackStrength = attacker.Stats.AttackPower;
 
-      var targetDefense = defender.stats.defensePower;
+      var targetDefense = defender.Stats.DefensePower;
 
       var damage = (attackStrength - targetDefense / 2) / random.Next(2, 4);
 
@@ -145,8 +145,8 @@ namespace SlimeBattleSystem {
       // https://dragonquestcosmos.fandom.com/wiki/Formulas#Fleeing_Battle 
       // heroAgility * rand(0, 255) >= toughestMonsterAgility * rand(0, 255) * monsterRunFactor
 
-      return participant.stats.agility * random.Next(0, 255) >=
-             runningFrom.stats.agility * random.Next(0, 255);
+      return participant.Stats.Agility * random.Next(0, 255) >=
+             runningFrom.Stats.Agility * random.Next(0, 255);
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ namespace SlimeBattleSystem {
     public static List<Participant> GetPlayerParticipants(List<Participant> participants) {
       return participants.Where(participant =>
         participant.ParticipantType == ParticipantType.Player ||
-        participant.ParticipantType == ParticipantType.NPC).ToList();
+        participant.ParticipantType == ParticipantType.Npc).ToList();
     }
 
     /// <summary>
@@ -176,7 +176,7 @@ namespace SlimeBattleSystem {
     /// <param name="participants">A list of participants.</param>
     /// <returns>Participant</returns>
     public static Participant GetParticipantWithHighestAgility(List<Participant> participants) {
-      return participants.OrderByDescending(participant => participant.stats.agility).ToList()[0];
+      return participants.OrderByDescending(participant => participant.Stats.Agility).ToList()[0];
     }
 
     /// <summary>
@@ -185,7 +185,7 @@ namespace SlimeBattleSystem {
     /// <param name="participants">A list of participants.</param>
     /// <returns>int</returns>
     public static int GetNumberOfRemainingParticipants(List<Participant> participants) {
-      return participants.Count(participant => participant.stats.hitPoints > 0);
+      return participants.Count(participant => participant.Stats.HitPoints > 0);
     }
 
     /// <summary>
@@ -219,7 +219,7 @@ namespace SlimeBattleSystem {
     public static int DetermineExperiencePoints(List<Participant> defeatedParticipants) {
       var xpSum = 0;
 
-      foreach (var defeatedParticipant in defeatedParticipants) xpSum += defeatedParticipant.experiencePoints;
+      foreach (var defeatedParticipant in defeatedParticipants) xpSum += defeatedParticipant.ExperiencePoints;
 
       return xpSum;
     }
@@ -248,7 +248,7 @@ namespace SlimeBattleSystem {
       var gpSum = 0;
 
       foreach (var defeatedParticipant in defeatedParticipants)
-        gpSum += defeatedParticipant.goldPoints * (random.Next(0, 63) + 192) / 256;
+        gpSum += defeatedParticipant.GoldPoints * (random.Next(0, 63) + 192) / 256;
 
       return gpSum;
     }

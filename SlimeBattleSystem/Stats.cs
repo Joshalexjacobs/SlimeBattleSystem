@@ -1,101 +1,106 @@
 using System;
 
-namespace SlimeBattleSystem
-{
+namespace SlimeBattleSystem {
+  /// <summary>
+  ///   Stats used to track HP, MP, Strength, Agility, Attack Power, Defense Power, and chance to Dodge (X/64).
+  /// </summary>
+  [Serializable]
+  public class Stats {
+    // player's unmodified agility
+    public int Agility;
 
-    [Serializable]
-    public class Stats
-    {
-        public Stats() {
-            hitPoints = 1;
-                
-            maxHitPoints = 1;
+    // weapons/items that contribute to attack
+    public int AttackPower;
 
-            magicPoints = 1;
-                
-            maxMagicPoints = 1;
+    // armor/items that contribute to defense 
+    public int DefensePower;
 
-            strength = 1;
+    // chance that a participant can dodge an attack out of 64
+    public int Dodge;
 
-            agility = 1;
+    // current HP
+    public int HitPoints;
 
-            attackPower = 1;
+    // current level
+    public int Level;
 
-            defensePower = 1;
+    // current MP
+    public int MagicPoints;
 
-            dodge = 1;
-            
-            level = 1;
-        }
+    // max HP
+    public int MaxHitPoints;
 
-        public Stats(Stats stats) {
-            hitPoints = stats.hitPoints;
-            
-            maxHitPoints = stats.maxHitPoints;
+    // max MP
+    public int MaxMagicPoints;
 
-            magicPoints = stats.magicPoints;
-            
-            maxMagicPoints = stats.maxMagicPoints;
+    // player's unmodified strength
+    public int Strength;
 
-            strength = stats.strength;
+    public Stats() {
+      HitPoints = 1;
 
-            agility = stats.agility;
-            
-            attackPower = stats.attackPower;
+      MaxHitPoints = 1;
 
-            defensePower = stats.defensePower;
+      MagicPoints = 1;
 
-            dodge = stats.dodge;
-            
-            level = stats.level;
-        }
+      MaxMagicPoints = 1;
 
-        public Stats(int hitPoints, int maxHitPoints, int magicPoints, int maxMagicPoints, int strength, int agility, int attackPower, int defensePower, int dodge, int level = 1) {
-            this.hitPoints = hitPoints;
-            
-            this.maxHitPoints = maxHitPoints;
-            
-            this.magicPoints = magicPoints;
-            
-            this.maxMagicPoints = maxMagicPoints;
-            
-            this.strength = strength;
-            
-            this.agility = agility;
-            
-            this.attackPower = attackPower;
-            
-            this.defensePower = defensePower;
-            
-            this.dodge = dodge;
+      Strength = 1;
 
-            this.level = level;
-        }
+      Agility = 1;
 
-        public int hitPoints;
-        
-        public int maxHitPoints;
+      AttackPower = 1;
 
-        public int magicPoints;
-        
-        public int maxMagicPoints;
+      DefensePower = 1;
 
-        // player's base strength
-        public int strength;
+      Dodge = 1;
 
-        // player's base agility
-        public int agility;
-
-        // weapons/items that contribute to attack
-        public int attackPower;
-        
-        // armor/items that contribute to defense 
-        public int defensePower;
-
-        // chance that a participant can dodge an attack
-        public int dodge;
-        
-        public int level;
+      Level = 1;
     }
-    
+
+    public Stats(Stats stats) {
+      HitPoints = stats.HitPoints;
+
+      MaxHitPoints = stats.MaxHitPoints;
+
+      MagicPoints = stats.MagicPoints;
+
+      MaxMagicPoints = stats.MaxMagicPoints;
+
+      Strength = stats.Strength;
+
+      Agility = stats.Agility;
+
+      AttackPower = stats.AttackPower;
+
+      DefensePower = stats.DefensePower;
+
+      Dodge = stats.Dodge;
+
+      Level = stats.Level;
+    }
+
+    public Stats(int hitPoints, int maxHitPoints, int magicPoints, int maxMagicPoints, int strength, int agility,
+      int attackPower, int defensePower, int dodge, int level = 1) {
+      HitPoints = hitPoints;
+
+      MaxHitPoints = maxHitPoints;
+
+      MagicPoints = magicPoints;
+
+      MaxMagicPoints = maxMagicPoints;
+
+      Strength = strength;
+
+      Agility = agility;
+
+      AttackPower = attackPower;
+
+      DefensePower = defensePower;
+
+      Dodge = dodge;
+
+      Level = level;
+    }
+  }
 }
