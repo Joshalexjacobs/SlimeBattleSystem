@@ -13,7 +13,11 @@ An easy to use RPG combat system for Unity that utilizes formulas from the origi
 ## Check out the sample!
 [url here]
 
+----
+
 *Note: This package was created with the first Dragon Quest game in mind. Therefore a lot of the logic being handled here is intended for 1v1 battles, but I've done my best to try and support battles bigger than 2 combatants. A lot of this logic is currently untested and may have some kinks that I'll need to iron out in the future.*
+
+----
 
 ## Formulas used
 
@@ -28,11 +32,8 @@ An easy to use RPG combat system for Unity that utilizes formulas from the origi
 
 ## What's missing?
 
-### Spells and Items
-I originally planned on baking spells and items into the package, but after some testing decided that this will be much more flexible if handled by the user. If you're looking for an easy way to do this, check out the [sample repo.](https://github.com/Joshalexjacobs/SlimeBattleSystemSample)
-
-### Status ailments
-Currently there is no way to impair a player character or enemy's status (eg. Sleep, Poison, Paralysis, etc). These kinds of impairments are crucial to Dragon Quest and most other RPGs so I will be adding them in the near future, but for now they have not been included.
+### Spells, Items, and Status Ailments
+I originally planned on baking these into the package, but after some testing decided that this will be much more flexible if handled by the user. If you're looking for an easy way to do this, check out the [sample repo.](https://github.com/Joshalexjacobs/SlimeBattleSystemSample) 
 
 ### Leveling and name based stat growth
 In the original Dragon Quest, your character's name determines how your stats will grow upon leveling. After reviewing the logic I figured this was a bit too complex at this time. For now I'm leaving all leveling and stat growth to the user, but may add this as an optional function in the future.
