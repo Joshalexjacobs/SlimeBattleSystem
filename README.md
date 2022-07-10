@@ -1,6 +1,9 @@
 # SlimeBattleSystem
 An easy to use RPG combat system for Unity that utilizes formulas from the original Dragon Quest.
 
+## Check out the sample!
+[url here]
+
 ## Formulas used
 
 - Battle Turn Order
@@ -10,8 +13,12 @@ An easy to use RPG combat system for Unity that utilizes formulas from the origi
 - Fleeing
 - Awarding Experience Points
 - Awarding Gold Points
+- Determining items dropped
 
 ## What's missing?
+
+### Spells and Items
+I originally planned on baking spells and items into the package, but after some testing decided that this will be much more flexible if handled by the user.
 
 ### Status ailments
 Currently there is no way to impair a player character or enemy's status (eg. Sleep, Poison, Paralysis, etc). These kinds of impairments are crucial to Dragon Quest and most other RPGs so I will be adding them in the near future, but for now they have not been included.
