@@ -6,8 +6,23 @@ namespace SlimeBattleSystem {
   /// </summary>
   [Serializable]
   public class Stats {
+    // player's unmodified strength
+    public int Strength;
+
     // player's unmodified agility
     public int Agility;
+
+    // current HP
+    public int HitPoints;
+
+    // max HP
+    public int MaxHitPoints;
+
+    // current MP
+    public int MagicPoints;
+
+    // max MP
+    public int MaxMagicPoints;
 
     // weapons/items that contribute to attack
     public int AttackPower;
@@ -18,23 +33,8 @@ namespace SlimeBattleSystem {
     // chance that a participant can dodge an attack out of 64
     public int Dodge;
 
-    // current HP
-    public int HitPoints;
-
     // current level
     public int Level;
-
-    // current MP
-    public int MagicPoints;
-
-    // max HP
-    public int MaxHitPoints;
-
-    // max MP
-    public int MaxMagicPoints;
-
-    // player's unmodified strength
-    public int Strength;
 
     public Stats() {
       HitPoints = 1;
