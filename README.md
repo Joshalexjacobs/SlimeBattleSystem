@@ -19,35 +19,67 @@ A static class that handles all combat logic.
 ### SetRandomizationSeed
 Sets the randomization seed used by most formulas.
 ```csharp
-var seed = "New Seed";
+string seed = "New Seed";
     
 BattleSystem.SetRandomizationSeed(seed);
 ```
 
 ### CalculateTurnOrder
-Calculates a participant's turn order with a random range using their Agility stat. Returns an integer.
+Calculates a participant's turn order with a random range using their Agility stat. 
+
+Returns an integer.
 ```csharp
 foreach (var participant in participants) {
-    participant.TurnOrder = BattleSystem.CalculateTurnOrder(participant.Stats.Agility, random);
+    participant.TurnOrder = BattleSystem.CalculateTurnOrder(participant.Stats.Agility);
 }
 ```
 
 ### DetermineTurnOrder
-Determines the order a group of Participants will attack in.
+Determines the order a group of Participants will attack in. 
+
+Returns a list of the ordered Participants.
 ```csharp
-a
+List<Participant> orderedParticipants = BattleSystem.DetermineTurnOrder(participants);
 ```
 
 ### DetermineEnemyTarget
-Determines the order a group of Participants will attack in.
+Determines the player participant an enemy will target during their turn. 
+
+Returns 1 Participant.
 ```csharp
-a
+Participant target = BattleSystem.DetermineEnemyTarget(playerParticipants);
 ```
 
 ### DetermineAttackDamage
-Determines the order a group of Participants will attack in.
+Determines whether the attacker hits the target and how much damage is dealt.
+
+Returns an AttackResult object which contains Type and Damage.
 ```csharp
-a
+var results = BattleSystem.DetermineAttackDamage(currentParticipant, target);
+
+battleLog.UpdateLog($"{currentParticipant.Name} attacks!.\n");
+
+switch (results.Type)
+{
+    case AttackResults.AttackType.Hit:
+        battleLog.UpdateLog($"{target.Name}'s Hit Points have been reduced by {results.Damage}.\n");
+
+        break;
+    case AttackResults.AttackType.CriticalHit:
+        battleLog.UpdateLog($"Critical hit!!!\n");
+        
+        battleLog.UpdateLog($"{target.Name}'s Hit Points have been reduced by {results.Damage}.\n");
+        
+        break;
+    case AttackResults.AttackType.Missed:
+        battleLog.UpdateLog($"Missed! {target.Name} dodged the attack.\n");
+                
+        break;
+}
+
+if (results.Damage > 0) {
+    target.InflictDamage(results.Damage);
+}
 ```
 
 ### DetermineParticipantFleeing
