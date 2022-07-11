@@ -167,7 +167,7 @@ public class BattleSystemTests {
         new RandomMock(new[] { 1, 1, 64 }));
 
       // Critical hit
-      Assert.AreEqual(8, results.damage);
+      Assert.AreEqual(8, results.Damage);
     }
 
     [Test]
@@ -184,7 +184,7 @@ public class BattleSystemTests {
         new RandomMock(new[] { participantB.Stats.Dodge }));
 
       // Dodge
-      Assert.AreEqual(0, results.damage);
+      Assert.AreEqual(0, results.Damage);
     }
 
     [Test]
@@ -201,7 +201,7 @@ public class BattleSystemTests {
         new RandomMock(new[] { 2, 2, 64 }));
 
       // Regular hit
-      Assert.AreEqual(1, results.damage);
+      Assert.AreEqual(1, results.Damage);
     }
   }
 

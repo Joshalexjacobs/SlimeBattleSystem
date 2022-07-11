@@ -1,38 +1,6 @@
 using System;
-using System.Collections.Generic;
 
 namespace SlimeBattleSystem {
-  [Serializable]
-  public enum ParticipantActionType {
-    Attack,
-    Item,
-    Spell,
-    Flee
-  }
-
-  /// <summary>
-  ///   An action a Participant makes during a battle.
-  /// </summary>
-  [Serializable]
-  public class ParticipantAction {
-    public ParticipantActionType ActionType;
-
-    public ParticipantAction() { }
-
-    public ParticipantAction(ParticipantActionType actionType) {
-      ActionType = actionType;
-    }
-
-    /// <summary>
-    ///   Determines the target the participant is attacking, casting a spell on, or using an item on.
-    /// </summary>
-    /// <param name="participants">A list of Participants.</param>
-    /// <returns>Participant</returns>
-    public virtual Participant DetermineTarget(List<Participant> participants) {
-      return participants[0];
-    }
-  }
-
   [Serializable]
   public enum ParticipantType {
     Player,
@@ -92,23 +60,11 @@ namespace SlimeBattleSystem {
     }
 
     /// <summary>
-    ///   Determines the participant's action during their turn.
-    /// </summary>
-    /// <param name="random">Random class to use in generating turn order.</param>
-    /// <returns>ParticipantAction</returns>
-    public virtual ParticipantAction DetermineParticipantAction(Random random) {
-      // used to determine enemy patterns
-      // eg. 50% to attack or cast a spell
-
-      return new ParticipantAction(ParticipantActionType.Attack);
-    }
-
-    /// <summary>
     ///   Inflicts allotted damage to the participant. Will floor hit points to 0.
     /// </summary>
     /// <param name="damage">Amount of damage inflicted.</param>
     /// <returns>void</returns>
-    public virtual void InflictDamage(int damage) {
+    public void InflictDamage(int damage) {
       Stats.HitPoints -= damage;
 
       if (Stats.HitPoints < 0) Stats.HitPoints = 0;
