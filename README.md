@@ -271,27 +271,6 @@ playerCombatant.shieldSlot = leatherShield;
 playerParticipant.CalculateDefensePower(leatherShield.defensePower);
 ```
 
-### DetermineParticipantAction
-Determines the participant's action during their turn. Should be overridden for enemies and NPCs.
-
-Returns `ParticipantAction`, an object used to determine an AI participant's actions.
-```csharp
-var action = slimeCombatant.participant.DetermineParticipantAction();
-
-switch (action.Type)
-{
-    case ParticipantActionType.Attack:
-        var target = action.DetermineTarget(playerParticipants);
-        
-        var result = BattleSystem.DetermineAttackDamage(slimeCombatant.participant, target);
-        
-        ...
-        
-        break;
-}
-
-```
-
 ### InflictDamage
 Inflicts allotted damage to the participant. Will floor hit points to 0.
 
