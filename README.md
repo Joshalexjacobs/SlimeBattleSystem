@@ -7,6 +7,10 @@ An easy to use RPG combat system for Unity that emulates the battle formulas fro
 2. Drop it into your assets folder
 3. You should now be able to reference the SlimeBattleSystem namespace within your own scripts
 
+
+*Don't like reading documentation? Take a look at the [sample unity project!](https://github.com/Joshalexjacobs/SlimeBattleSystemSample)*
+
+
 # API
 
 ## Battle System
@@ -111,7 +115,7 @@ https://github.com/Joshalexjacobs/SlimeBattleSystemSample
 
 ----
 
-## Formulas used
+# Formulas used
 
 - Battle Turn Order
 - Attacking
@@ -137,3 +141,11 @@ In the base game, enemy health is randomly determined between 75% - 100% of thei
 
 ### Experience/Gold Multiplier
 I did discover a formula for increasing experience points and gold points based on the number of characters in the player's party. For now I've omitted any multiplier due to the fact that this system is entirely based on the original Dragon Quest (in which there is only 1 member in the party). However, I would love to add some sort of configurable profiles in the future allowing for minor changes like this one.
+
+# Sources and additional reading material
+
+[Game Developer: How Final Fantasy and Dragon Quest handle combat math](https://www.gamedeveloper.com/design/number-punchers-how-i-final-fantasy-i-and-i-dragon-quest-i-handle-combat-math)
+
+[Formula Guide (NES) by Ryan8bit](https://gamefaqs.gamespot.com/nes/563408-dragon-warrior/faqs/61640)
+
+[Names/Stats/Levels FAQ (NES) by akiraslime](https://gamefaqs.gamespot.com/nes/563408-dragon-warrior/faqs/18342)
