@@ -17,6 +17,9 @@ A static class that handles all combat logic.
 
 ### SetRandomizationSeed
 Sets the randomization seed used by most formulas.
+
+Params `string`
+
 ```csharp
 string seed = "New Seed";
     
@@ -25,6 +28,8 @@ BattleSystem.SetRandomizationSeed(seed);
 
 ### CalculateTurnOrder
 Calculates a participant's turn order with a random range using their Agility stat. 
+
+Params `int`
 
 Returns `int`
 ```csharp
@@ -36,7 +41,9 @@ foreach (var participant in participants) {
 ### DetermineTurnOrder
 Determines the order a group of Participants will attack in. 
 
-Returns `List<Participant>` sorted by turn order.
+Params `List<Participant>`
+
+Returns `List<Participant>`, sorted by turn order
 ```csharp
 List<Participant> orderedParticipants = BattleSystem.DetermineTurnOrder(participants);
 ```
@@ -44,13 +51,17 @@ List<Participant> orderedParticipants = BattleSystem.DetermineTurnOrder(particip
 ### DetermineEnemyTarget
 Determines the player participant an enemy will target during their turn. 
 
-Returns `Participant`.
+Params `List<Participant>`
+
+Returns `Participant`
 ```csharp
 Participant target = BattleSystem.DetermineEnemyTarget(playerParticipants);
 ```
 
 ### DetermineAttackDamage
 Determines whether the attacker hits the target and how much damage is dealt.
+
+Params `Participant (attacker)`, `Participant (target)`
 
 Returns `AttackResult`, contains Type (`AttackType` enum) and Damage (`int`).
 ```csharp
@@ -84,6 +95,10 @@ if (results.Damage > 0) {
 ### DetermineParticipantFleeing
 Determines whether the participant is able to flee or not.
 
+Will use the highest Agility stat of the participants in the runningFrom list. 
+
+Params `Participant (runner)`, `List<Participant> (runningFrom)`
+
 Returns `bool`.
 ```csharp
 bool result = BattleSystem.DetermineParticipantFleeing(currentParticipant, enemy);
@@ -103,6 +118,8 @@ else
 ### GetPlayerParticipants
 Gets a list of Player and NPC participants.
 
+Params `List<Participant>`
+
 Returns `List<Participant>`
 ```csharp
 var playerParticipants = BattleSystem.GetPlayerParticipants(participants);
@@ -110,6 +127,8 @@ var playerParticipants = BattleSystem.GetPlayerParticipants(participants);
 
 ### GetEnemyParticipants
 Gets a list of Enemy participants.
+
+Params `List<Participant>`
 
 Returns `List<Participant>`
 ```csharp
@@ -119,6 +138,8 @@ var enemyParticipants = BattleSystem.GetEnemyParticipants(participants);
 ### GetParticipantWithHighestAgility
 Gets the participant with the highest agility.
 
+Params `List<Participant>`
+
 Returns `Participant`.
 ```csharp
 var participant = GetParticipantWithHighestAgility(participants);
@@ -127,6 +148,8 @@ var participant = GetParticipantWithHighestAgility(participants);
 ### GetNumberOfRemainingParticipants
 Gets the number of remaining participants with hit points greater than 0.
 
+Params `List<Participant>`
+
 Returns `int`.
 ```csharp
 var enemiesRemaining = BattleSystem.GetNumberOfRemainingParticipants(enemyParticipants);
@@ -134,6 +157,8 @@ var enemiesRemaining = BattleSystem.GetNumberOfRemainingParticipants(enemyPartic
 
 ### IsBattleOver
 Gets whether the battle has ended or not.
+
+Params `List<Participant>`
 
 Returns `bool`.
 ```csharp
@@ -148,6 +173,8 @@ if (BattleSystem.IsBattleOver(participants))
 ### DetermineExperiencePoints
 Gets experience points gained from defeated participants.
 
+Params `List<Participant>`
+
 Returns `int`.
 ```csharp
 var experiencePoints = BattleSystem.DetermineExperiencePoints(enemyParticipants);
@@ -160,6 +187,8 @@ player.ExperiencePoints += experiencePoints;
 ### DetermineGoldPoints
 Gets gold points gained from defeated participants.
 
+Params `List<Participant>`
+
 Returns `int`.
 ```csharp
 var gold = BattleSystem.DetermineGoldPoints(enemyParticipants);
@@ -171,6 +200,8 @@ player.GoldPoints += gold;
 
 ### DetermineItemsDropped
 Gets any items gained from defeated participants.
+
+Params `Dictionary<T, int>`, `T` being the class or item object and int being the chance to drop out of 100
 
 Returns `List<T>`
 ```csharp
