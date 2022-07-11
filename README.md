@@ -1,5 +1,5 @@
 # Slime Battle System 🐉⚔️🛡️
-An easy to use RPG combat system for Unity that emulates the battle formulas from the original Dragon Quest.
+A lightweight RPG combat system for Unity that emulates the battle formulas from the original Dragon Quest.
 
 ## Installation
 
