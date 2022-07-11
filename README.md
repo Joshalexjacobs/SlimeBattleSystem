@@ -1,21 +1,113 @@
-# SlimeBattleSystem
-An easy to use RPG combat system for Unity that utilizes formulas from the original Dragon Quest.
+# Slime Battle System 🐉⚔️🛡️
+An easy to use RPG combat system for Unity that emulates the battle formulas from the original Dragon Quest.
 
-## Getting started
+## Installation
 
-1. Download the latest SlimeBattleSystem.dll release found [here!](https://github.com/Joshalexjacobs/SlimeBattleSystem/releases) 
-2. Drop it into your assets folder.
+1. Download the latest SlimeBattleSystem.dll release found [here](https://github.com/Joshalexjacobs/SlimeBattleSystem/releases) 
+2. Drop it into your assets folder
+3. You should now be able to reference the SlimeBattleSystem namespace within your own scripts
 
-## Classes
+# API
 
-## Functions
+## Battle System
+A static class that handles all combat logic.
 
-## Check out the sample!
-[url here]
+### SetRandomizationSeed
+Sets the randomization seed used by most formulas.
+```csharp
+var seed = "New Seed";
+    
+BattleSystem.SetRandomizationSeed(seed);
+```
 
-----
+### CalculateTurnOrder
+Calculates a participant's turn order with a random range using their Agility stat. Returns an integer.
+```csharp
+foreach (var participant in participants) {
+    participant.TurnOrder = BattleSystem.CalculateTurnOrder(participant.Stats.Agility, random);
+}
+```
 
-*Note: This package was created with the first Dragon Quest game in mind. Therefore a lot of the logic being handled here is intended for 1v1 battles, but I've done my best to try and support battles bigger than 2 combatants. A lot of this logic is currently untested and may have some kinks that I'll need to iron out in the future.*
+### DetermineTurnOrder
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### DetermineEnemyTarget
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### DetermineAttackDamage
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### DetermineParticipantFleeing
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### GetPlayerParticipants
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### GetEnemyParticipants
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### GetParticipantWithHighestAgility
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### GetNumberOfRemainingParticipants
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### IsBattleOver
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### DetermineExperiencePoints
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### DetermineGoldPoints
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+### DetermineItemsDropped
+Determines the order a group of Participants will attack in.
+```csharp
+a
+```
+
+# Confused? Check out the sample project!
+
+https://github.com/Joshalexjacobs/SlimeBattleSystemSample
+
+![Unity Sample Gif](https://i.imgur.com/S3mjjGf.gif)
+
+
+*Note: This package was created with the first Dragon Quest game in mind. Most of the logic being handled here is intended for 1v1 battles, but I've done my best to try and support battles bigger than 2 combatants.*
 
 ----
 
