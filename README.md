@@ -8,10 +8,9 @@ An easy to use RPG combat system for Unity that emulates the battle formulas fro
 3. You should now be able to reference the SlimeBattleSystem namespace within your own scripts
 
 
-*Don't like reading documentation? Take a look at the [sample unity project!](https://github.com/Joshalexjacobs/SlimeBattleSystemSample)*
-
-
 # API
+
+*Don't like reading documentation? Take a look at the [sample unity project!](https://github.com/Joshalexjacobs/SlimeBattleSystemSample)*
 
 ## Battle System
 A static class that handles all combat logic.
@@ -147,21 +146,47 @@ if (BattleSystem.IsBattleOver(participants))
 ```
 
 ### DetermineExperiencePoints
-Determines the order a group of Participants will attack in.
+Gets experience points gained from defeated participants.
+
+Returns `int`.
 ```csharp
-a
+var experiencePoints = BattleSystem.DetermineExperiencePoints(enemyParticipants);
+
+battleLog.UpdateLog($"Thy Experience increases by {experiencePoints}.\n");
+
+player.ExperiencePoints += experiencePoints;
 ```
 
 ### DetermineGoldPoints
-Determines the order a group of Participants will attack in.
+Gets gold points gained from defeated participants.
+
+Returns `int`.
 ```csharp
-a
+var gold = BattleSystem.DetermineGoldPoints(enemyParticipants);
+
+battleLog.UpdateLog($"Thy GOLD increases by {goldPoints}.\n");
+
+player.GoldPoints += gold;
 ```
 
 ### DetermineItemsDropped
-Determines the order a group of Participants will attack in.
+Gets any items gained from defeated participants.
+
+Returns `List<T>`
 ```csharp
-a
+Dictionary<Item, int> droppableItems = new Dictionary<Item, int>(); 
+
+foreach (var enemyCombatantDroppableItem in enemyCombatant.droppableItems) {
+    droppableItems.Add(enemyCombatantDroppableItem.item, enemyCombatantDroppableItem.chanceToDrop);
+}
+
+var itemsDropped = BattleSystem.DetermineItemsDropped<Item>(droppableItems);
+
+foreach (Item item in itemsDropped) {
+    battleLog.UpdateLog($"{enemy.Name} dropped a {item.name}!\n");
+    
+    playerCombatant.items.Add(item);
+}
 ```
 
 # Confused? Check out the sample project!
