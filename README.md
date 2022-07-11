@@ -199,6 +199,8 @@ player.GoldPoints += gold;
 ```
 
 ### DetermineItemsDropped
+*Note: I couldn't find a lot on item drop rates so I've taken some liberties here to make this as flexible as possible.*
+
 Gets any items gained from defeated participants.
 
 Params `Dictionary<T, int>`, `T` being the class or item object and int being the chance to drop out of 100
@@ -218,6 +220,86 @@ foreach (Item item in itemsDropped) {
     
     playerCombatant.items.Add(item);
 }
+```
+
+## AttackResult
+A simple class that is returned after a `Participant` attacks.
+
+```csharp
+  public class AttackResult {
+    public enum AttackType {
+      Hit,
+      CriticalHit,
+      Missed
+    }
+
+    public AttackType Type;
+
+    public int Damage;
+
+    public AttackResult(AttackType type, int damage) {
+      Type = type;
+      Damage = damage;
+    }
+  }
+```
+
+## Participant
+An enemy, NPC, or player character that participates in battle.
+
+### CalculateAttackPower
+Calculates participants attack power. Should be called after a new weapon is equipped.
+
+Params `int`
+
+Returns `void`
+```csharp
+playerCombatant.weaponSlot = ironAxe;
+
+playerParticipant.CalculateAttackPower(ironAxe.attackPower);
+```
+
+### CalculateDefensePower
+Calculates participants defense power. Should be called after a new piece of armor is equipped.
+
+Params `int`
+
+Returns `void`
+```csharp
+playerCombatant.shieldSlot = leatherShield;
+
+playerParticipant.CalculateDefensePower(leatherShield.defensePower);
+```
+
+### DetermineParticipantAction
+Determines the participant's action during their turn. Should be overridden for enemies and NPCs.
+
+Returns `ParticipantAction`, an object used to determine an AI participant's actions.
+```csharp
+var action = slimeCombatant.participant.DetermineParticipantAction();
+
+switch (action.Type)
+{
+    case ParticipantActionType.Attack:
+        var target = action.DetermineTarget(playerParticipants);
+        
+        var result = BattleSystem.DetermineAttackDamage(slimeCombatant.participant, target);
+        
+        ...
+        
+        break;
+}
+
+```
+
+### InflictDamage
+Inflicts allotted damage to the participant. Will floor hit points to 0.
+
+Params `int`
+
+Returns `void`
+```csharp
+target.InflictDamage(results.damage);
 ```
 
 # Confused? Check out the sample project!
