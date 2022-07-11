@@ -38,6 +38,8 @@ I originally planned on baking these into the package, but after some testing de
 ### Leveling and name based stat growth
 In the original Dragon Quest, your character's name determines how your stats will grow upon leveling. After reviewing the logic I figured this was a bit too complex at this time. For now I'm leaving all leveling and stat growth to the user, but may add this as an optional function in the future.
 
+*For those interested: akiraslime posted a great Dragon Warrior stat growth FAQ [here.](https://gamefaqs.gamespot.com/nes/563408-dragon-warrior/faqs/18342)*
+
 ### 75% - 100% Enemy Health Formula
 In the base game, enemy health is randomly determined between 75% - 100% of their max health (eg. a Magician has a max health pool of 13 hit points. When encountered, a Magician would have 10 - 13 hit points). For simplicity sake, I've decided to omit this logic for now as it could be easily added before beginning the encounter if desired.
 
