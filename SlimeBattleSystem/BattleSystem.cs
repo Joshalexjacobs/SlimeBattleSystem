@@ -35,7 +35,7 @@ namespace SlimeBattleSystem {
     }
 
     /// <summary>
-    ///   Calculates the turn order given a Participant's Agility stat.
+    ///   Calculates a participant's turn order with a random range using their Agility stat.
     /// </summary>
     /// <param name="agility">Agility stat.</param>
     /// <param name="random">Random class to use in generating turn order.</param>
@@ -80,7 +80,7 @@ namespace SlimeBattleSystem {
       return playerParticipants[random.Next(0, playerParticipants.Count)];
     }
 
-    public static AttackResults DetermineAttackDamage(Participant attacker, Participant defender) {
+    public static AttackResult DetermineAttackDamage(Participant attacker, Participant defender) {
       return DetermineAttackDamage(attacker, defender, Random);
     }
 
@@ -91,11 +91,11 @@ namespace SlimeBattleSystem {
     /// <param name="defender">The defending participant.</param>
     /// <param name="random">Random class to use in generating turn order.</param>
     /// <returns>AttackResults</returns>
-    public static AttackResults DetermineAttackDamage(Participant attacker, Participant defender, Random random) {
+    public static AttackResult DetermineAttackDamage(Participant attacker, Participant defender, Random random) {
       if (random.Next(defender.Stats.Dodge, 64) <= defender.Stats.Dodge)
         // attack was dodged
 
-        return new AttackResults(AttackResults.AttackType.Missed, 0);
+        return new AttackResult(AttackResult.AttackType.Missed, 0);
 
       if (random.Next(1, 32) == 1) {
         // critical hit
@@ -104,7 +104,7 @@ namespace SlimeBattleSystem {
 
         var criticalHitDamage = criticalHitAttackStrength / random.Next(1, 2);
 
-        return new AttackResults(AttackResults.AttackType.CriticalHit, criticalHitDamage);
+        return new AttackResult(AttackResult.AttackType.CriticalHit, criticalHitDamage);
       }
 
       // perform regular attack
@@ -115,7 +115,7 @@ namespace SlimeBattleSystem {
 
       var damage = (attackStrength - targetDefense / 2) / random.Next(2, 4);
 
-      return new AttackResults(AttackResults.AttackType.Hit, damage);
+      return new AttackResult(AttackResult.AttackType.Hit, damage);
     }
 
     public static bool DetermineParticipantFleeing(Participant participant, Participant runningFrom) {
@@ -180,7 +180,7 @@ namespace SlimeBattleSystem {
     }
 
     /// <summary>
-    ///   Returns the number of remaining participants with hit points.
+    ///   Gets the number of remaining participants with hit points greater than 0.
     /// </summary>
     /// <param name="participants">A list of participants.</param>
     /// <returns>int</returns>
@@ -258,7 +258,7 @@ namespace SlimeBattleSystem {
     }
 
     /// <summary>
-    ///   Returns gold points gained from defeated participants.
+    ///   Returns items gained from defeated participants.
     /// </summary>
     /// <param name="droppableItems">A Dictionary<T, int> of items and their chance to drop out of 100.</param>
     /// <param name="random">Random class to use in generating turn order.</param>
@@ -278,20 +278,20 @@ namespace SlimeBattleSystem {
   ///   The results of an attack containing the type and damage amount.
   /// </summary>
   [Serializable]
-  public class AttackResults {
+  public class AttackResult {
     public enum AttackType {
       Hit,
       CriticalHit,
       Missed
     }
 
-    public AttackType attackType;
+    public AttackType Type;
 
-    public int damage;
+    public int Damage;
 
-    public AttackResults(AttackType attackType, int damage) {
-      this.attackType = attackType;
-      this.damage = damage;
+    public AttackResult(AttackType type, int damage) {
+      Type = type;
+      Damage = damage;
     }
   }
 }
