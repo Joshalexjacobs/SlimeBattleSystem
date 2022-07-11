@@ -27,7 +27,7 @@ BattleSystem.SetRandomizationSeed(seed);
 ### CalculateTurnOrder
 Calculates a participant's turn order with a random range using their Agility stat. 
 
-Returns an integer.
+Returns `int`
 ```csharp
 foreach (var participant in participants) {
     participant.TurnOrder = BattleSystem.CalculateTurnOrder(participant.Stats.Agility);
@@ -37,7 +37,7 @@ foreach (var participant in participants) {
 ### DetermineTurnOrder
 Determines the order a group of Participants will attack in. 
 
-Returns a list of the ordered Participants.
+Returns `List<Participant>` sorted by turn order.
 ```csharp
 List<Participant> orderedParticipants = BattleSystem.DetermineTurnOrder(participants);
 ```
@@ -45,7 +45,7 @@ List<Participant> orderedParticipants = BattleSystem.DetermineTurnOrder(particip
 ### DetermineEnemyTarget
 Determines the player participant an enemy will target during their turn. 
 
-Returns 1 Participant.
+Returns `Participant`.
 ```csharp
 Participant target = BattleSystem.DetermineEnemyTarget(playerParticipants);
 ```
@@ -53,7 +53,7 @@ Participant target = BattleSystem.DetermineEnemyTarget(playerParticipants);
 ### DetermineAttackDamage
 Determines whether the attacker hits the target and how much damage is dealt.
 
-Returns an AttackResult object which contains Type and Damage.
+Returns `AttackResult`, contains Type (`AttackType` enum) and Damage (`int`).
 ```csharp
 var results = BattleSystem.DetermineAttackDamage(currentParticipant, target);
 
@@ -83,39 +83,67 @@ if (results.Damage > 0) {
 ```
 
 ### DetermineParticipantFleeing
-Determines the order a group of Participants will attack in.
+Determines whether the participant is able to flee or not.
+
+Returns `bool`.
 ```csharp
-a
+bool result = BattleSystem.DetermineParticipantFleeing(currentParticipant, enemy);
+
+if (!result)
+{
+    battleLog.UpdateLog("But the escape route was cut off!\n");
+}
+else
+{
+    battleLog.UpdateLog($"{currentParticipant.Name} escaped!\n");
+    
+    battleState = BattleState.Ended;
+}
 ```
 
 ### GetPlayerParticipants
-Determines the order a group of Participants will attack in.
+Gets a list of Player and NPC participants.
+
+Returns `List<Participant>`
 ```csharp
-a
+var playerParticipants = BattleSystem.GetPlayerParticipants(participants);
 ```
 
 ### GetEnemyParticipants
-Determines the order a group of Participants will attack in.
+Gets a list of Enemy participants.
+
+Returns `List<Participant>`
 ```csharp
-a
+var enemyParticipants = BattleSystem.GetEnemyParticipants(participants);
 ```
 
 ### GetParticipantWithHighestAgility
-Determines the order a group of Participants will attack in.
+Gets the participant with the highest agility.
+
+Returns `Participant`.
 ```csharp
-a
+var participant = GetParticipantWithHighestAgility(participants);
 ```
 
 ### GetNumberOfRemainingParticipants
-Determines the order a group of Participants will attack in.
+Gets the number of remaining participants with hit points greater than 0.
+
+Returns `int`.
 ```csharp
-a
+var enemiesRemaining = BattleSystem.GetNumberOfRemainingParticipants(enemyParticipants);
 ```
 
 ### IsBattleOver
-Determines the order a group of Participants will attack in.
+Gets whether the battle has ended or not.
+
+Returns `bool`.
 ```csharp
-a
+if (BattleSystem.IsBattleOver(participants))
+{
+    battleState = BattleState.Ended;
+    
+    soundManager.StopSound(soundManager.battleMusic);
+}
 ```
 
 ### DetermineExperiencePoints
