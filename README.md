@@ -1,7 +1,7 @@
 # Slime Battle System 🐉⚔️🛡️
 A lightweight RPG combat system for Unity that emulates the battle formulas from the original Dragon Quest.
 
-## Installation
+## Installation (Unity)
 
 1. Download the latest SlimeBattleSystem.dll release found [here](https://github.com/Joshalexjacobs/SlimeBattleSystem/releases) 
 2. Drop it into your assets folder
