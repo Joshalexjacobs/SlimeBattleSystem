@@ -15,6 +15,8 @@ A lightweight RPG combat system for Unity that emulates the battle formulas from
 ## Battle System
 A static class that handles all combat logic.
 
+<br/>
+
 ### SetRandomizationSeed
 Sets the randomization seed used by most formulas.
 
@@ -25,6 +27,8 @@ string seed = "New Seed";
     
 BattleSystem.SetRandomizationSeed(seed);
 ```
+
+<br/>
 
 ### CalculateTurnOrder
 Calculates a participant's turn order with a random range using their Agility stat. 
@@ -38,6 +42,8 @@ foreach (var participant in participants) {
 }
 ```
 
+<br/>
+
 ### DetermineTurnOrder
 Determines the order a group of Participants will attack in. 
 
@@ -48,6 +54,8 @@ Returns `List<Participant>`, sorted by turn order
 List<Participant> orderedParticipants = BattleSystem.DetermineTurnOrder(participants);
 ```
 
+<br/>
+
 ### DetermineEnemyTarget
 Determines the player participant an enemy will target during their turn. 
 
@@ -57,6 +65,8 @@ Returns `Participant`
 ```csharp
 Participant target = BattleSystem.DetermineEnemyTarget(playerParticipants);
 ```
+
+<br/>
 
 ### DetermineAttackDamage
 Determines whether the attacker hits the target and how much damage is dealt.
@@ -92,6 +102,8 @@ if (results.Damage > 0) {
 }
 ```
 
+<br/>
+
 ### DetermineParticipantFleeing
 Determines whether the participant is able to flee or not.
 
@@ -115,6 +127,8 @@ else
 }
 ```
 
+<br/>
+
 ### GetPlayerParticipants
 Gets a list of Player and NPC participants.
 
@@ -124,6 +138,8 @@ Returns `List<Participant>`
 ```csharp
 var playerParticipants = BattleSystem.GetPlayerParticipants(participants);
 ```
+
+<br/>
 
 ### GetEnemyParticipants
 Gets a list of Enemy participants.
@@ -135,6 +151,8 @@ Returns `List<Participant>`
 var enemyParticipants = BattleSystem.GetEnemyParticipants(participants);
 ```
 
+<br/>
+
 ### GetParticipantWithHighestAgility
 Gets the participant with the highest agility.
 
@@ -145,6 +163,8 @@ Returns `Participant`.
 var participant = GetParticipantWithHighestAgility(participants);
 ```
 
+<br/>
+
 ### GetNumberOfRemainingParticipants
 Gets the number of remaining participants with hit points greater than 0.
 
@@ -154,6 +174,8 @@ Returns `int`.
 ```csharp
 var enemiesRemaining = BattleSystem.GetNumberOfRemainingParticipants(enemyParticipants);
 ```
+
+<br/>
 
 ### IsBattleOver
 Gets whether the battle has ended or not.
@@ -170,6 +192,8 @@ if (BattleSystem.IsBattleOver(participants))
 }
 ```
 
+<br/>
+
 ### DetermineExperiencePoints
 Gets experience points gained from defeated participants.
 
@@ -184,6 +208,8 @@ battleLog.UpdateLog($"Thy Experience increases by {experiencePoints}.\n");
 player.ExperiencePoints += experiencePoints;
 ```
 
+<br/>
+
 ### DetermineGoldPoints
 Gets gold points gained from defeated participants.
 
@@ -197,6 +223,8 @@ battleLog.UpdateLog($"Thy GOLD increases by {goldPoints}.\n");
 
 player.GoldPoints += gold;
 ```
+
+<br/>
 
 ### DetermineItemsDropped
 *Note: I couldn't find a lot on item drop rates so I've taken some liberties here to make this as flexible as possible.*
@@ -221,6 +249,8 @@ foreach (Item item in itemsDropped) {
     playerCombatant.items.Add(item);
 }
 ```
+
+<br/>
 
 ## AttackResult
 A simple class that is returned after a `Participant` attacks.
@@ -247,6 +277,8 @@ A simple class that is returned after a `Participant` attacks.
 ## Participant
 An enemy, NPC, or player character that participates in battle.
 
+<br/>
+
 ### CalculateAttackPower
 Calculates participants attack power. Should be called after a new weapon is equipped.
 
@@ -259,6 +291,8 @@ playerCombatant.weaponSlot = ironAxe;
 playerParticipant.CalculateAttackPower(ironAxe.attackPower);
 ```
 
+<br/>
+
 ### CalculateDefensePower
 Calculates participants defense power. Should be called after a new piece of armor is equipped.
 
@@ -270,6 +304,8 @@ playerCombatant.shieldSlot = leatherShield;
 
 playerParticipant.CalculateDefensePower(leatherShield.defensePower);
 ```
+
+<br/>
 
 ### InflictDamage
 Inflicts allotted damage to the participant. Will floor hit points to 0.
